@@ -1,0 +1,48 @@
+<!--<h1>Edit Movie</h1>
+<div class="block">
+    <form [formGroup]="movieForm">
+        Name<br>
+        <input type="text" formControlName="title">
+       <br><br>
+        MPAA Rating<br>
+        <select formControlName="mpaaRating">
+            <option *ngFor="let mpaaRating of mpaaRatings">
+                {{mpaaRating.name}}
+            </option>
+        </select>
+        <br><br>
+
+        Rating<br>
+        <input type="text" formControlName="rating">
+        <br><br>
+        
+        Duration<br>
+        <input type="text" formControlName="duration">
+        <br><br>
+        
+        Budget<br>
+        <input type="text" formControlName="budget">
+        <br><br>
+        
+        Release Date<br>
+        <input type="text" formControlName="releaseDate">
+        <br><br>
+
+        Genres<br>
+        <div *ngFor="let genre of genres">
+            <input type="checkbox" [formControlName]="genre.id"> {{genre.name}}
+        </div>
+
+        <input type="submit" value="Save">
+    </form>
+</div>
+<div class="block">
+    <strong>Movie model</strong>
+    <pre>{{movieForm | json}}</pre>
+</div>
+-->
+
+<h1>Genre</h1>
+<form [formGroup]="genreForm">
+    <input type="text" formControlName="name">
+</form>

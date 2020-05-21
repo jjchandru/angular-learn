@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Movie } from './model/movie';
-import { movies } from '../constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie',
@@ -9,12 +9,23 @@ import { movies } from '../constants';
 })
 export class MovieComponent implements OnInit {
 
-  //movie: Movie = movies[3];
+  //movie: Movie = movies[0];
+  //movies: Movie[] = movies;
   @Input() movie: Movie;
+  @Output() favoriteSelected: EventEmitter<boolean> = new EventEmitter();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  selectFavorite() {
+    this.favoriteSelected.emit(true);
+    this.movie.favorite = !this.movie.favorite;
+  }
+
+  showEdit() {
+    console.log("Inside showEdit()");
+    this.router.navigate(['/edit-movie', this.movie.id]);
+  }
 }

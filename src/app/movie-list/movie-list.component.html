@@ -1,1 +1,13 @@
-<app-movie [movie]="movie" *ngFor="let movie of movies"></app-movie>
+<h1>Movie List</h1>
+
+<input [(ngModel)]="searchKey" type="text" placeholder="Find movies">
+<div>{{searchKey}}</div>
+
+<!--<div>{{movies[0].favorite}}</div>-->
+
+<app-movie 
+    [movie]="movie" 
+    (favoriteSelected)="toggleFavorite()" 
+    *ngFor="let movie of movies">
+</app-movie>
+

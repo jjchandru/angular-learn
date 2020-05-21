@@ -1,7 +1,7 @@
 <div class="movie-card">
     <div class="movie-title">
         {{movie.title}} 
-        <span class="movie-year">({{movie.releaseDate | date: 'yyyy'}})</span>
+        <span class="movie-year">({{movie.releaseDate}})</span>
     </div>
     <span class="movie-genre" *ngFor="let genre of movie.genres">
         {{genre.name}} 
@@ -18,4 +18,13 @@
     <span *ngIf="!movie.bookingsOpen" class="booking-closed">
         Bookings Closed
     </span>
+    <span *ngIf="!movie.favorite" class="favorite" (click)="selectFavorite()">
+        <i class="material-icons">favorite_border</i>
+    </span>
+    <span *ngIf="movie.favorite" class="favorite-selected" (click)="selectFavorite()">
+        <i class="material-icons">favorite</i>
+    </span>
+    <div>
+        <input type="button" value="Edit" (click)="showEdit()">
+    </div>
 </div>

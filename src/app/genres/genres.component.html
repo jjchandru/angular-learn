@@ -1,0 +1,12 @@
+<div class="block">
+    <form [formGroup]="genreForm">
+        ID<br>
+        <input type="text" formControlName="id"><br>
+        Name<br>
+        <input type="text" formControlName="name">
+    </form>
+</div>
+<div class="block">
+    <pre>{{genreForm.value | json}}</pre>
+</div>
+

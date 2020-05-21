@@ -42,6 +42,22 @@
 	width: 25%;
 	float: left;
 	margin: 15px;
-	height: 120px
+	height: 180px
 }
 
+.favorite {
+	color: #CCCCCC;
+	cursor: pointer;
+	float:right
+}
+
+.favorite:hover {
+	color: red;
+	cursor: pointer;
+}
+
+.favorite-selected {
+	color: red;
+	float: right;
+	cursor: pointer;
+}

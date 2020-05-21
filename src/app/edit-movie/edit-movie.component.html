@@ -1,0 +1,65 @@
+<h1>Edit Movie</h1>
+<div class="block">
+    <form #movieForm="ngForm" (ngSubmit)="onSubmit()">
+        Name<br>
+        <input type="text" [(ngModel)]="movie.title" name="title" #title="ngModel"
+            minlength="3" maxlength="30" required>
+        <div class="error" *ngIf="title.invalid && (title.dirty || title.touched)">
+            <div *ngIf="title.errors.required">Title is required.</div>
+            <div *ngIf="title.errors.minlength">Title should be at least 2 characters.</div>
+            <div *ngIf="title.errors.maxlength">Title cannot exceed 30 characters.
+            </div>
+        </div>
+       <br><br>
+        MPAA Rating<br>
+        <select name="mpaaRating" [(ngModel)]="movie.mpaaRating.id">
+            <option *ngFor="let mpaaRating of mpaaRatings"
+                [selected]="mpaaRating.id == movie.mpaaRating.id"
+                [value]="mpaaRating.id">
+                {{mpaaRating.name}}
+            </option>
+        </select>
+        <br><br>
+
+Rating<br>
+<input type="text" [(ngModel)]="movie.rating" name="rating">
+<br><br>
+
+Duration<br>
+<input type="text" [(ngModel)]="movie.duration" name="duration">
+<br><br>
+
+Budget<br>
+<input type="text" [(ngModel)]="movie.budget" name="budget">
+<br><br>
+
+Release Date<br>
+<input type="text" [(ngModel)]="movie.releaseDate" name="releaseDate">
+<br><br>
+
+    Bookings Open<br>
+<input type="radio" name="bookingsOpen" [(ngModel)]="movie.bookingsOpen" [value]="true"> Yes 
+<input type="radio" name="bookingsOpen" [(ngModel)]="movie.bookingsOpen" [value]="false"> No 
+<br><br>
+
+Favorite <input type="checkbox" name="favorite" [(ngModel)]="movie.favorite">
+<br><br>
+
+Genres<br>
+<label *ngFor="let genre of genres">
+    <input type="checkbox" name="genres" [checked]="genre.selected"
+        (change)="genreChanged(genre.id)" value="genre.id"> {{genre.name}}
+</label>
+<br><br>
+
+        <input type="submit" [disabled]="!movieForm.valid" value="Save">
+    </form>
+</div>
+<div class="block">
+    <strong>Movie model</strong>
+    <pre>{{movie | json}}</pre>
+</div>
+<div class="block">
+    <strong>Angular generated form model</strong>
+    <pre>{{movieForm.value | json}}</pre>
+</div>

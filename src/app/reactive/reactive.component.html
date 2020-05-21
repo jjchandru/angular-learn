@@ -1,0 +1,17 @@
+<h1>Manage Genres</h1>
+<div class="block">
+<form [formGroup]="genresForm">
+    <div formArrayName="genres">
+        <div *ngFor="let genre of genres.controls; let i = index" [formGroupName]="i">
+            {{genre.value.id}}
+            <input type="text" formControlName="name">
+            &nbsp;<input type="button" value="Delete" (click)="deleteGenre(i)">
+        </div>
+    </div>
+    <input type="button" value="Add" (click)="addGenre()">
+</form>
+</div>
+<div class="block">
+<pre>{{genresForm.value | json}}</pre>
+</div>
+
