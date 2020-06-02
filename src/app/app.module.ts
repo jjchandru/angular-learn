@@ -13,6 +13,8 @@ import { EditMovieReactiveComponent } from './edit-movie-reactive/edit-movie-rea
 import { ReactiveComponent } from './reactive/reactive.component';
 import { GenresComponent } from './genres/genres.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HttpComponent } from './http/http.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { ProfileComponent } from './profile/profile.component';
     EditMovieReactiveComponent,
     ReactiveComponent,
     GenresComponent,
-    ProfileComponent
+    ProfileComponent,
+    HttpComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

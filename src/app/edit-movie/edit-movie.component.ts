@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../movie/model/movie';
-import { movies } from '../data';
+//import { movies } from '../data';
 import { MpaaRating } from '../movie/model/mpaa-rating';
-import { mpaaRatings } from '../data';
+//import { mpaaRatings } from '../data';
 import { Genre } from '../movie/model/genre';
 import { genres } from '../data';
+import { MovieService } from '../movie/movie.service';
 
 @Component({
   selector: 'app-edit-movie',
@@ -15,28 +16,45 @@ import { genres } from '../data';
 export class EditMovieComponent implements OnInit {
   
   movie: Movie;
-  mpaaRatings: MpaaRating[] = mpaaRatings;
-  genres: Genre[] = genres;
+  mpaaRatings: MpaaRating[];
+  genres: Genre[];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router,
+    private movieService: MovieService) { }
 
   ngOnInit(): void {
     let id: string = this.route.snapshot.paramMap.get('id');
-    for (let i: number = 0; i < movies.length; i++) {
+    /*for (let i: number = 0; i < movies.length; i++) {
       if (movies[i].id == parseInt(id)) {
         this.movie = movies[i];
       }
-    }
+    }*/
+    this.movieService.getMovie(parseInt(id)).subscribe(
+      (data: Movie) => {
+        this.movie = data
+      }
+    );
 
-    // iterate all genres from data.ts
-    for (let i = 0; i < genres.length; i++) {
-      // iterate through genres of this movie and set selected
-      for (let j = 0; j < this.movie.genres.length; j++) {
-        if (genres[i].id == this.movie.genres[j].id) {
-          genres[i].selected = true;
+    this.movieService.getGenres().subscribe(
+      (data: Genre[]) => {
+        this.genres = data
+        for (let i = 0; i < this.genres.length; i++) {
+          for (let j = 0; j < this.movie.genres.length; j++) {
+            if (this.genres[i].id == this.movie.genres[j].id) {
+              this.genres[i].selected = true;
+            }
+          }
         }
       }
-    }
+    );
+
+    this.movieService.getMpaaRatngs().subscribe(
+      (data: MpaaRating[]) => {
+        this.mpaaRatings = data
+      }
+    );
   }
 
   mpaaRatingChanged(id: number) {
@@ -62,7 +80,13 @@ export class EditMovieComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(JSON.stringify(this.movie));
+    //console.log(JSON.stringify(this.movie));
+    //let json: string = JSON.stringify(this.movie);
+    this.movieService.updateMovie(this.movie).subscribe(
+      data => {
+        this.router.navigate(['/movie-list']);
+      }
+    );
   }
 
 }

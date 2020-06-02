@@ -6,14 +6,18 @@ import { EditMovieReactiveComponent } from './edit-movie-reactive/edit-movie-rea
 import { ReactiveComponent } from './reactive/reactive.component';
 import { GenresComponent } from './genres/genres.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HttpComponent } from './http/http.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: 'movie-list', component: MovieListComponent },
-  { path: 'edit-movie/:id', component: EditMovieComponent },
-  { path: 'edit-movie-reactive/:id', component: EditMovieReactiveComponent },
-  { path: 'reactive', component: ReactiveComponent },
-  { path: 'genres', component: GenresComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'movie-list', component: MovieListComponent, canActivate: [AuthGuard] },
+  { path: 'edit-movie/:id', component: EditMovieComponent, canActivate: [AuthGuard] },
+  { path: 'genres', component: GenresComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'http', component: HttpComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: "/login", pathMatch: 'full'}
 ];
 
 @NgModule({

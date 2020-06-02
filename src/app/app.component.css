@@ -4,6 +4,8 @@ a:visited {
 
 a {
     text-decoration: none;
+    color: blue;
+    cursor: pointer
 }
 
 .active-link {
